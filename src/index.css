@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-950 text-slate-200 antialiased;
+  font-family: 'Sora', system-ui, sans-serif;
+  overscroll-behavior-y: none;
+}
+
+.light body {
+  @apply bg-slate-100 text-slate-800;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { @apply bg-ink-700/60 rounded-full; }
+.light ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full; }
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-white/5 bg-ink-850/80 backdrop-blur-sm;
+  }
+  .light .card {
+    @apply border-slate-200 bg-white/90 shadow-sm;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:border-brand-500/40 hover:shadow-glow-sm;
+  }
+  .light .card-hover {
+    @apply hover:border-brand-400/60 hover:shadow-lg;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-400 shadow-glow-sm;
+  }
+  .btn-ghost {
+    @apply btn bg-white/5 text-slate-200 hover:bg-white/10;
+  }
+  .light .btn-ghost {
+    @apply bg-slate-100 text-slate-700 hover:bg-slate-200;
+  }
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-ink-900/60 px-4 py-3 text-slate-100 placeholder-slate-500 outline-none transition-all focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/20;
+  }
+  .light .input {
+    @apply border-slate-300 bg-white text-slate-800 placeholder-slate-400;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .skeleton {
+    @apply relative overflow-hidden bg-white/5 rounded-lg;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/* Utility for safe-area bottom nav */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+
+/* Prevent layout shift on number changes */
+.tabular-nums { font-variant-numeric: tabular-nums; }
